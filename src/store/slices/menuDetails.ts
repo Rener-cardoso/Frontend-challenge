@@ -63,7 +63,7 @@ const initialState: InitialStateProps = {
 }
 
 export const loadMenuDetails = createAsyncThunk('getMenu', async () => {
-  const response = await fetch("/api/challenge/menu");
+  const response = await fetch(`/api/challenge/menu`);
   const data = await response.json();
   
   return data;
