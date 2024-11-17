@@ -16,7 +16,7 @@ export function Cart() {
   })
   
   return (
-    <aside className="hidden sm:block bg-white col-span-2 shadow-[0_0_15px_rgba(0,0,0,0.1)] max-h-max">
+    <aside className="hidden lg:block bg-white col-span-2 shadow-[0_0_15px_rgba(0,0,0,0.1)] max-h-max">
       <div className="bg-[#F8F9FA]">
         <h2 className="font-medium text-[#464646] text-2xl px-6 py-4">Carrinho</h2>
       </div>

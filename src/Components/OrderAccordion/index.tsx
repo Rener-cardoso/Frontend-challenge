@@ -45,11 +45,11 @@ export interface OrderAccordionProps {
 export function OrderAccordion({ name, sectionId, items, }: OrderAccordionProps) {
   return (
     <AccordionItem value={String(sectionId)} className="">
-      <AccordionTrigger className="text-2xl font-medium text-[#121212] px-4 sm:px-6">
+      <AccordionTrigger className="text-2xl font-medium text-[#121212] px-4 lg:px-6">
         {name}
       </AccordionTrigger>
 
-      <AccordionContent className="flex flex-col px-4 sm:px-6">
+      <AccordionContent className="flex flex-col px-4 lg:px-6">
         {items.map(item => (
           <OrderAccordionItem key={item.id} orderItem={item} />
         ))}          

@@ -19,7 +19,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }, 
     ref,
   ) => (
-    <div className={cn("border border-[#8A94A4] flex items-center gap-2 bg-white rounded-lg px-[0.625rem] sm:px-4 py-[0.625rem] sm:py-3", className)}>
+    <div className={cn("border border-[#8A94A4] flex items-center gap-2 bg-white rounded-lg px-[0.625rem] lg:px-4 py-[0.625rem] lg:py-3", className)}>
       {Icon && <Icon className="text-[#8A94A4] h-5 w-5" />}
 
       <input 

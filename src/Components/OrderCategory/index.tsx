@@ -14,7 +14,7 @@ export function OrderCategory({ name, image, handleSelectCategory, selected = fa
   return (
     <button 
       onClick={() => handleSelectCategory()}
-      className="group sm:px-1 flex flex-col items-center" 
+      className="group lg:px-1 flex flex-col items-center" 
     >
       <div 
         style={{ border: selected ? `2px solid ${store?.primaryColour}` : '2px solid transparent'}} 
