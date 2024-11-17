@@ -33,7 +33,7 @@ export function CartItem({ indexItem }: CartItemProps) {
   }
 
   return (
-    <div className="flex justify-between px-4 py-2">
+    <div className="bg-white flex justify-between px-4 py-2 border-b-[1px] border-b-[#EEEEEE] lg:border-b-[transparent]">
       <div className="flex flex-col gap-1">
         <div>
           <h2 className="text-base text-[#121212] font-normal">{name}</h2>

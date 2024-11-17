@@ -29,7 +29,7 @@ export function Menu() {
           width={0}
           height={0}
           sizes="100vw" 
-          className="w-full h-[10rem] sm:h-auto object-cover sm:object-contain" 
+          className="w-full h-[10rem] lg:h-auto object-cover lg:object-contain" 
         />
       </div>
 
@@ -40,7 +40,7 @@ export function Menu() {
           className="m-4 sm:my-2 placeholder:text-[#1F2329] text-base"
         />
 
-        <div className="bg-[#F8F9FA] grid grid-cols-6 gap-8 sm:px-10 sm:py-8">
+        <div className="bg-[#F8F9FA] grid grid-cols-6 gap-8 lg:px-10 lg:py-8">
           <MainMenu />
           <Cart />
           <MobileCart />

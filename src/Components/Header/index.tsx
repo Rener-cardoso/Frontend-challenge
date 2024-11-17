@@ -1,7 +1,12 @@
 import { Menu } from "lucide-react";
 import { useAppSelector } from "../../store";
 import { cn } from "../../utils/cn";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuTrigger 
+} from "../ui/dropdown-menu";
 
 const navigation = [
   { url: "/", title: "Menu" },
@@ -20,21 +25,37 @@ export function Header() {
 
   return (
     <header style={{ backgroundColor: store?.primaryColour}} className="sticky top-0">
-      <div className="relative flex sm:hidden justify-center py-4 text-white">
-        <h1 className="text-lg font-medium">Menu</h1>
+      <div className="relative flex lg:hidden justify-center py-4 text-white">
+        <h1 className="text-lg font-medium">
+          {pathname === "/" 
+          ? "Menu" 
+          : pathname === "/signIn" 
+          ? "Entrar" 
+          : pathname === "/contact" 
+          && "Contato"}
+        </h1>
 
-        <Dialog>
-          <DialogTrigger>
-            <Menu className="absolute right-4 top-1/2 transform -translate-y-1/2" />
-          </DialogTrigger>
+        <DropdownMenu >
+          <DropdownMenuTrigger className="absolute right-4 top-1/2 transform -translate-y-1/2">
+            <Menu />
+          </DropdownMenuTrigger>
 
-          <DialogContent>
-            teste
-          </DialogContent>
-        </Dialog>
+          <DropdownMenuContent align="start" className="bg-white mt-[0.85rem] min-w-[15rem] mr-2">
+            {navigation.map(item => (
+              <DropdownMenuItem key={item.title}>
+                <a 
+                  href={item.url} 
+                  className="text-base font-normal"
+                >
+                  {item.title}
+                </a>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
-      <nav className="hidden sm:block">
+      <nav className="hidden lg:block">
         <ul className="flex justify-center text-white uppercase text-xl">
           {navigation.map(item => (
             <li key={item.title} className={cn("flex justify-center min-w-40 py-3 border-b-4 ", pathname === item.url ? "border-b-white" : "border-b-[transparent]")}>
