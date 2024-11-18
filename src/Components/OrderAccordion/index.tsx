@@ -44,7 +44,7 @@ export interface OrderAccordionProps {
 
 export function OrderAccordion({ name, sectionId, items, }: OrderAccordionProps) {
   return (
-    <AccordionItem value={String(sectionId)} className="">
+    <AccordionItem value={String(sectionId)}>
       <AccordionTrigger className="text-2xl font-medium text-[#121212] px-4 lg:px-6">
         {name}
       </AccordionTrigger>

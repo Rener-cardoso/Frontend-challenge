@@ -1,5 +1,5 @@
+import { useRestaurantTheme } from "../../store/slices/restaurantDetails";
 import { Menu } from "lucide-react";
-import { useAppSelector } from "../../store";
 import { cn } from "../../utils/cn";
 import { 
   DropdownMenu, 
@@ -7,6 +7,7 @@ import {
   DropdownMenuItem, 
   DropdownMenuTrigger 
 } from "../ui/dropdown-menu";
+import { Link } from "react-router-dom";
 
 const navigation = [
   { url: "/", title: "Menu" },
@@ -15,16 +16,12 @@ const navigation = [
 ]
 
 export function Header() {
-  const store = useAppSelector(store => {
-    const layoutDetails = store.restaurant.restaurantInfo?.webSettings;
-
-    return layoutDetails
-  });
+  const theme = useRestaurantTheme();
 
   const pathname = window.location.pathname
 
   return (
-    <header style={{ backgroundColor: store?.primaryColour}} className="sticky top-0">
+    <header style={{ backgroundColor: theme?.webSettings.navBackgroundColour }} className="sticky top-0">
       <div className="relative flex lg:hidden justify-center py-4 text-white">
         <h1 className="text-lg font-medium">
           {pathname === "/" 
@@ -43,12 +40,12 @@ export function Header() {
           <DropdownMenuContent align="start" className="bg-white mt-[0.85rem] min-w-[15rem] mr-2">
             {navigation.map(item => (
               <DropdownMenuItem key={item.title}>
-                <a 
-                  href={item.url} 
+                <Link 
+                  to={item.url} 
                   className="text-base font-normal"
                 >
                   {item.title}
-                </a>
+                </Link>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -59,9 +56,9 @@ export function Header() {
         <ul className="flex justify-center text-white uppercase text-xl">
           {navigation.map(item => (
             <li key={item.title} className={cn("flex justify-center min-w-40 py-3 border-b-4 ", pathname === item.url ? "border-b-white" : "border-b-[transparent]")}>
-              <a href={item.url}>
+              <Link to={item.url}>
                 {item.title}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

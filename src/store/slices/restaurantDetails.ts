@@ -1,35 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-interface RestaurantProps {
-  address1: string;
-  address2: string;
-  address3: null
-  ccy: string;
-  ccySymbol: string;
-  city: string;
-  country: string;
-  county: string;
-  currency: string;
-  demoFlag: number;
-  description: null
-  id: number;
-  internalName: string;
-  liveFlag: number
-  locale: string;
-  name: string;
-  postcode: string;
-  timeZone: string;
-  timezoneOffset: string;
-  webSettings: {
-    backgroundColour: string;
-    bannerImage: string;
-    id: number;
-    navBackgroundColour: string;
-    primaryColour: string;
-    primaryColourHover: string;
-    venueId: number;
-  }
-}
+import { useAppSelector } from "..";
+import { RestaurantProps } from "../../types";
 
 interface InitialStateProps {
   restaurantInfo: null | RestaurantProps;
@@ -40,7 +11,7 @@ const initialState: InitialStateProps = {
 }
 
 export const loadRestaurantDetails = createAsyncThunk('getDetails', async () => {
-  const response = await fetch(`/api/challenge/venue/9`);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/challenge/venue/9`);
   const data = await response.json();
   
   return data;
@@ -54,7 +25,19 @@ const restaurantSlice = createSlice({
     builder.addCase(loadRestaurantDetails.fulfilled, (state, action) => {
       state.restaurantInfo = action.payload
     })
+
+    builder.addCase(loadRestaurantDetails.rejected, () => {
+      window.location.href = '/error';
+    })
   },
 })
 
 export const restaurantDetails = restaurantSlice.reducer;
+
+export const useRestaurantTheme = () => {
+  return useAppSelector(store => {
+    const { restaurantInfo } = store.restaurant;
+
+    return restaurantInfo;
+  })
+}

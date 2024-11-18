@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../store";
+import { useRestaurantTheme } from "../../store/slices/restaurantDetails";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { OrderAccordionProps } from "../OrderAccordion";
 import { OrderDialog } from "../OrderDialog";
@@ -9,6 +10,8 @@ interface OrderAccordionContentProps {
 }
 
 export function OrderAccordionItem({ orderItem }: OrderAccordionContentProps) {
+  const theme = useRestaurantTheme();
+
   const quantityOrder = useAppSelector(store => {
     const { cart } = store.menu;
 
@@ -27,7 +30,13 @@ export function OrderAccordionItem({ orderItem }: OrderAccordionContentProps) {
         <button className="flex justify-between py-4">
           <div className="flex flex-col items-start">
             <div className="flex items-center gap-2">
-              {quantityOrder && <span className="flex items-center justify-center h-5 w-5 bg-[#4F372F] text-sm text-white font-medium rounded-[4px]">{quantityOrder}</span>}
+              {quantityOrder && 
+                <span 
+                  style={{ backgroundColor: theme?.webSettings.primaryColour }} 
+                  className="flex items-center justify-center h-5 w-5 text-sm text-white font-medium rounded-[4px]"
+                >
+                  {quantityOrder}
+                </span>}
               <h2 className="font-medium text-[#121212] text-base">{orderItem.name}</h2>
             </div>
             <p className="text-[#464646] text-start text-base font-light line-clamp-1 max-w-96">{orderItem.description}</p>

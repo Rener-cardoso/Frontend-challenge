@@ -3,6 +3,7 @@ import { Menu } from "../pages/Menu";
 import { Layout } from "../pages/Layout";
 import { SignIn } from "../pages/SignIn";
 import { Contact } from "../pages/Contact";
+import { Error } from "../pages/Error";
 
 export function RoutesApp() {
   return (
@@ -13,6 +14,8 @@ export function RoutesApp() {
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
+
+        <Route path="/error" element={<Error />} />
       </Routes>
     </BrowserRouter>
   )

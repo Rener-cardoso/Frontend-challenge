@@ -1,6 +1,7 @@
 import { Minus, Plus } from "lucide-react";
 import { cn } from "../../utils/cn";
 import { useEffect, useState } from "react";
+import { useRestaurantTheme } from "../../store/slices/restaurantDetails";
 
 interface RemoveAddCartBoxProps {
   variant?: 'default' | 'cartItem';
@@ -8,6 +9,7 @@ interface RemoveAddCartBoxProps {
 }
 
 export function RemoveAddCartBox({ variant = 'default', currentValue, }: RemoveAddCartBoxProps) {
+  const theme = useRestaurantTheme();
   const [unity, setUnity] = useState(1);
 
   function handleAdd() {
@@ -25,9 +27,13 @@ export function RemoveAddCartBox({ variant = 'default', currentValue, }: RemoveA
   return (
     <div className={cn("flex items-center", variant === 'default' ? "gap-7 my-3" : variant === 'cartItem' && "gap-4")}>
       <button
+        style={{ 
+          backgroundColor: unity === 1 ? "#DADADA" : theme?.webSettings.primaryColour,
+          color: unity === 1 ? "#5F5F5F" : "#fff"
+        }}
         onClick={() => handleRemove()}
         disabled={unity === 1}
-        className={cn("bg-[#4f372f] text-white disabled:bg-[#DADADA] disabled:text-[#5F5F5F] flex items-center justify-center p-[0.1rem] rounded-full",
+        className={cn("text-white disabled:bg-[#DADADA] disabled:text-[#5F5F5F] flex items-center justify-center p-[0.1rem] rounded-full",
           variant === 'default'
           ? "w-8 h-8"
           : variant === 'cartItem' 
@@ -49,8 +55,9 @@ export function RemoveAddCartBox({ variant = 'default', currentValue, }: RemoveA
       </span>
 
       <button
+        style={{ backgroundColor: theme?.webSettings.primaryColour }}
         onClick={() => handleAdd()}
-        className={cn("flex items-center justify-center p-[0.1rem] rounded-full bg-[#4f372f] text-white", 
+        className={cn("flex items-center justify-center p-[0.1rem] rounded-full text-white", 
           variant === 'default' 
           ? "w-8 h-8" 
           : variant === 'cartItem' 
