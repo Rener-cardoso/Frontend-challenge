@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: process.env.VITE_API_URL,
+        target: "https://cdn-dev.preoday.com",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
