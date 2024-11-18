@@ -12,7 +12,7 @@ const initialState: InitialStateProps = {
 
 export const loadRestaurantDetails = createAsyncThunk('getDetails', async () => {
   try {
-    const response = await fetch(`/api/challenge/venue/9`);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/restaurant-info`);
     const data = await response.json();
     
     return data;
