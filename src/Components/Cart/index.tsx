@@ -1,19 +1,11 @@
 import { useAppSelector } from "../../store"
+import { selectTotalCartPrice } from "../../store/selectors/totalCartPrice";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { CartItem } from "../CartItem";
 
 export function Cart() {
-  const { cart, totalCartPrice } = useAppSelector(store => {
-    const { cart } = store.menu;
-
-    const totalCartPrice = cart.reduce((acc, item) => {
-      const totalByItem = (item.unityPrice + (item.modifierItemSelected.price || 0)) * item.quantity;
-
-      return acc + totalByItem;
-    }, 0)
-
-    return { cart, totalCartPrice, };
-  })
+  const cart = useAppSelector(state => state.menu.cart);
+  const totalCartPrice = useAppSelector(selectTotalCartPrice);
   
   return (
     <aside className="hidden lg:block bg-white col-span-2 shadow-[0_0_15px_rgba(0,0,0,0.1)] max-h-max">

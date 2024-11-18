@@ -63,7 +63,7 @@ export function OrderDialog({ item }: OrderDialogProps) {
   }
 
   return (
-    <DialogContent className="bg-white min-w-full lg:max-w-min lg:min-w-[30rem] h-full lg:h-max flex flex-col">
+    <DialogContent className="bg-white min-w-full sm:max-w-min sm:min-w-[30rem] h-full sm:h-max flex flex-col">
       <DialogClose className="absolute w-7 h-7 rounded-full bg-white text-[#4f372f] flex items-center justify-center top-4 right-4">
         <X />
       </DialogClose>
@@ -73,7 +73,7 @@ export function OrderDialog({ item }: OrderDialogProps) {
           <img 
             src={item.images[0].image} 
             alt="" 
-            className="max-w-[30rem] max-h-[16.5rem] lg:max-h-[20rem]" 
+            className="min-w-full object-cover sm:max-w-[30rem] max-h-[16.5rem] sm:max-h-[20rem]" 
           />
         </div>
       )}

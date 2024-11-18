@@ -14,14 +14,8 @@ interface SelectModifierBoxProps {
 }
 
 export function SelectModifierBox({ selected = false, name, price, selectModifierItem  }: SelectModifierBoxProps) {
-  
-  const modifier = {
-    name,
-    price,
-  }
-  
   return (
-    <button onClick={() => selectModifierItem(modifier)} className="flex justify-between items-center px-6 py-4 w-full">
+    <button onClick={() => selectModifierItem({ name, price })} className="flex justify-between items-center px-6 py-4 w-full">
       <div>
         <h2 className="text-base text-[#121212] font-medium text-start">{name}</h2>
         <h3 className="text-base text-[#464646] font-normal">{formatCurrency(price)}</h3>

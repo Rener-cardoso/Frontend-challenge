@@ -3,24 +3,19 @@ import { Minus, Plus } from "lucide-react";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { decrementCartItem, incrementCartItem } from "../../store/slices/menuDetails";
+import { useRestaurantTheme } from "../../store/slices/restaurantDetails";
+import { selectCartItemDetails } from "../../store/selectors/cartItemDetails";
 
 interface CartItemProps {
   indexItem: number;
 }
 
 export function CartItem({ indexItem }: CartItemProps) {
-  const { name, modifier, quantity, totalPrice } = useAppSelector(store => {
-    const { name, quantity, unityPrice, modifierItemSelected, } = store.menu.cart[indexItem];
+  const theme = useRestaurantTheme();
 
-    const totalPrice = (unityPrice + (modifierItemSelected.price || 0)) * quantity;
-
-    return {
-      name,
-      totalPrice,
-      quantity,
-      modifier: modifierItemSelected,
-    }
-  })
+  const { name, quantity, totalPrice, modifier } = useAppSelector(
+    state => selectCartItemDetails(state, indexItem)
+  );
 
   const dispatch = useAppDispatch();
 
@@ -42,9 +37,13 @@ export function CartItem({ indexItem }: CartItemProps) {
 
         <div className={cn("flex items-center gap-4")}>
           <button
+            style={{ 
+              backgroundColor: quantity === 1 ? "#DADADA" : theme?.webSettings.primaryColour,
+              color: quantity === 1 ? "#5F5F5F" : "#fff"
+            }}
             disabled={quantity === 1}
             onClick={() => handleDecrementItem()}
-            className={cn("bg-[#4f372f] text-white disabled:bg-[#DADADA] disabled:text-[#5F5F5F] w-5 h-5 flex items-center justify-center rounded-full")          
+            className={cn("w-5 h-5 flex items-center justify-center rounded-full")          
             }
           >
             <Minus strokeWidth={3} />
@@ -55,8 +54,9 @@ export function CartItem({ indexItem }: CartItemProps) {
           </span>
 
           <button
+            style={{ backgroundColor: theme?.webSettings.primaryColour }}
             onClick={() => handleIncrementItem()}
-            className={cn("flex items-center justify-center rounded-full bg-[#4f372f] text-white w-5 h-5")}
+            className={cn("flex items-center justify-center rounded-full text-white w-5 h-5")}
           >
             <Plus strokeWidth={3} />
           </button>

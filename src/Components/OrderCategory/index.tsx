@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../store";
+import { useRestaurantTheme } from "../../store/slices/restaurantDetails";
 import { cn } from "../../utils/cn";
 
 interface OrderCategoryProps {
@@ -9,7 +9,7 @@ interface OrderCategoryProps {
 }
 
 export function OrderCategory({ name, image, handleSelectCategory, selected = false }: OrderCategoryProps) {
-  const store = useAppSelector(store => store.restaurant.restaurantInfo?.webSettings);
+  const theme = useRestaurantTheme();
 
   return (
     <button 
@@ -17,7 +17,7 @@ export function OrderCategory({ name, image, handleSelectCategory, selected = fa
       className="group lg:px-1 flex flex-col items-center" 
     >
       <div 
-        style={{ border: selected ? `2px solid ${store?.primaryColour}` : '2px solid transparent'}} 
+        style={{ border: selected ? `2px solid ${theme?.webSettings?.primaryColour}` : '2px solid transparent'}} 
         className="rounded-full border-2 w-max h-max"
       >
         <img 
@@ -28,8 +28,8 @@ export function OrderCategory({ name, image, handleSelectCategory, selected = fa
       </div>
 
       <div 
-        style={{ borderBottom: selected ? `2px solid ${store?.primaryColour}` : "2px solid transparent"}} 
-        className={cn("relative p-4 border-b-2 min-w-24", selected ? `border-b-[${store?.primaryColour}]` : "border-b-[transparent]")}
+        style={{ borderBottom: selected ? `2px solid ${theme?.webSettings.primaryColour}` : "2px solid transparent"}} 
+        className={cn("relative p-4 border-b-2 min-w-24", selected ? `border-b-[${theme?.webSettings.primaryColour}]` : "border-b-[transparent]")}
       >
         <h2 className={cn("text-[#121212] absolut", selected ? "font-semibold" : "font-normal group-hover:underline")}>
           {name}

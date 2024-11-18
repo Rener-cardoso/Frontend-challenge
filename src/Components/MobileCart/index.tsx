@@ -10,19 +10,11 @@ import {
 } from "../ui/dialog";
 import { CartItem } from "../CartItem";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { selectTotalCartPrice } from "../../store/selectors/totalCartPrice";
 
 export function MobileCart() {
-  const { cart, totalCartPrice } = useAppSelector(store => {
-    const { cart } = store.menu;
-
-    const totalCartPrice = cart.reduce((acc, item) => {
-      const totalByItem = (item.unityPrice + (item.modifierItemSelected.price || 0)) * item.quantity;
-
-      return acc + totalByItem;
-    }, 0)
-
-    return { cart, totalCartPrice, };
-  })
+  const cart = useAppSelector(state => state.menu.cart);
+  const totalCartPrice = useAppSelector(selectTotalCartPrice);
 
   return (
     <>

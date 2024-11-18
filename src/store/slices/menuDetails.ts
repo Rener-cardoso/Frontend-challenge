@@ -1,50 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ModifierProps } from "../../Components/SelectModifierBox";
+import { MenuProps } from "../../types";
 
-export interface MenuProps {
-  sections: {
-    description: null;
-    id: number;
-    images: {
-      id: number;
-      image: string;
-    }[];
-    items: {
-      alcoholic: number;
-      availabilityType: string;
-      available: boolean;
-      description: string;
-      id: number;
-      images: {
-        id: string;
-        image: string;
-      }[];
-      name: string;
-      position: number;
-      price: number;
-      sku: string;
-      modifiers: {
-        id: string;
-        name: string;
-        minChoices: number;
-        maxChoices: number;
-        items: {
-          id: number;
-          name: string;
-          price: number;
-          maxChoices: number;
-          position: number;
-          visible: number;
-          availabilityType: string;
-          available: boolean;
-        }[];
-      }[];
-      visible: number;
-    }[];
+interface AddCartPayloadProps { 
+  name: string; 
+  quantity: number; 
+  unityPrice: number; 
+  modifierItemSelected: {
     name: string;
-    position: number;
-    visible: number;
-  }[];
+    price: number;
+  };
 }
 
 interface InitialStateProps {
@@ -63,7 +28,7 @@ const initialState: InitialStateProps = {
 }
 
 export const loadMenuDetails = createAsyncThunk('getMenu', async () => {
-  const response = await fetch(`/api/challenge/menu`);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/challenge/menu`);
   const data = await response.json();
   
   return data;
@@ -73,7 +38,7 @@ const menuSlice = createSlice({
   name: "menuInfo",
   initialState,
   reducers: {
-    addCart: (state, action: PayloadAction<{ name: string; quantity: number; unityPrice: number; modifierItemSelected: any }>) => {
+    addCart: (state, action: PayloadAction<AddCartPayloadProps>) => {
       const newQuantity = action.payload.quantity;      
       const existItem = state.cart.find(item => item.name === action.payload.name);
 
@@ -84,14 +49,14 @@ const menuSlice = createSlice({
       }
 
     },
-    incrementCartItem: (state, action) => {
+    incrementCartItem: (state, action: PayloadAction<string>) => {
       const item = state.cart.find(item => item.name === action.payload);
 
       if (item) {
         item.quantity += 1;
       }
     },
-    decrementCartItem: (state, action) => {
+    decrementCartItem: (state, action: PayloadAction<string>) => {
       const item = state.cart.find(item => item.name === action.payload);
 
       if (item && item.quantity > 1) {
@@ -102,6 +67,10 @@ const menuSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(loadMenuDetails.fulfilled, (state, action) => {
       state.menuInfo = action.payload
+    })
+
+    builder.addCase(loadMenuDetails.rejected, () => {
+      window.location.href = '/error';
     })
   }
 })
