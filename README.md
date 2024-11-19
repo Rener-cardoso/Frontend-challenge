@@ -11,7 +11,6 @@ npm run dev
 ![React](https://img.shields.io/badge/React-18.2.0-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue)
 ![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-1.9.0-purple)
-![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
 
@@ -49,7 +48,6 @@ Otimizado, com foco na redução de renderizações desnecessárias.
 Testes Unitários dos Reducers
 Os testes unitários dos reducers da menuSlice foram implementados utilizando a biblioteca Vitest, que possui excelente integração com projetos baseados em Vite. Seu funcionamento é muito semelhante ao de outras bibliotecas como o Jest, garantindo uma curva de aprendizado tranquila para desenvolvedores já familiarizados com ferramentas similares.
 
-Executando os Testes
 Para rodar os testes unitários, basta executar o seguinte comando no terminal:
 
 ```
@@ -60,3 +58,7 @@ Isso iniciará o Vitest, executando os testes e exibindo o relatório de resulta
 
 Sobre a Escolha do Vitest
 O Vitest foi escolhido por sua rapidez e compatibilidade nativa com o Vite, além de oferecer recursos modernos para testes de aplicações React, Redux, e TypeScript. Essa escolha proporciona um ambiente de testes eficiente e ágil, ideal para o desenvolvimento em projetos modernos.
+
+Consumo de API
+
+Um ultimo detalhe é que criei uma simples api intermediária, por onde eu faço diretamente as requisições para a api fornecida no desafio, assim consigo contornar o erro de cors, configurando o backend para aceitar requisições do frontEnd.

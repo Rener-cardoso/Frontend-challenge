@@ -19,7 +19,7 @@ export function MobileCart() {
   return (
     <>
       {cart.length > 0 && (
-        <div className="lg:hidden fixed bottom-0 w-full p-4">
+        <div className="lg:hidden fixed bottom-0 w-full p-6">
           <div className="absolute inset-0 -z-10 backdrop-blur-sm bg-white/70" />
 
           <Dialog>
