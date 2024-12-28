@@ -8,7 +8,7 @@ import { RoutesApp } from './routes'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ReduxProvider  store={store}>
+    <ReduxProvider store={store}>
       <RoutesApp />
     </ReduxProvider>
   </StrictMode>,

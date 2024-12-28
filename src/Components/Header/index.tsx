@@ -1,15 +1,14 @@
 import { useRestaurantTheme } from "../../store/slices/restaurantDetails";
 import { Menu } from "lucide-react";
-import { cn } from "../../utils/cn";
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
   DropdownMenuItem, 
   DropdownMenuTrigger 
 } from "../ui/dropdown-menu";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
-const navigation = [
+const navigationLinks = [
   { url: "/", title: "Menu" },
   { url: "/signIn", title: "Entrar" },
   { url: "/contact", title: "Contato" },
@@ -18,19 +17,16 @@ const navigation = [
 export function Header() {
   const theme = useRestaurantTheme();
 
-  const pathname = window.location.pathname
+  const { pathname } = useLocation();
+
+  function getPageTitle(pathname: string) {
+    return navigationLinks.find(link => link.url === pathname)?.title || "";
+  }
 
   return (
     <header style={{ backgroundColor: theme?.webSettings.navBackgroundColour }} className="sticky top-0">
       <div className="relative flex lg:hidden justify-center py-4 text-white">
-        <h1 className="text-lg font-medium">
-          {pathname === "/" 
-          ? "Menu" 
-          : pathname === "/signIn" 
-          ? "Entrar" 
-          : pathname === "/contact" 
-          && "Contato"}
-        </h1>
+        <h1 className="text-lg font-medium">{getPageTitle(pathname)}</h1>
 
         <DropdownMenu >
           <DropdownMenuTrigger className="absolute right-4 top-1/2 transform -translate-y-1/2">
@@ -38,14 +34,14 @@ export function Header() {
           </DropdownMenuTrigger>
 
           <DropdownMenuContent align="start" className="bg-white mt-[0.85rem] min-w-[15rem] mr-2">
-            {navigation.map(item => (
+            {navigationLinks.map(item => (
               <DropdownMenuItem key={item.title}>
-                <Link 
+                <NavLink 
                   to={item.url} 
                   className="text-base font-normal"
                 >
                   {item.title}
-                </Link>
+                </NavLink>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -54,11 +50,14 @@ export function Header() {
 
       <nav className="hidden lg:block">
         <ul className="flex justify-center text-white uppercase text-xl">
-          {navigation.map(item => (
-            <li key={item.title} className={cn("flex justify-center min-w-40 py-3 border-b-4 ", pathname === item.url ? "border-b-white" : "border-b-[transparent]")}>
-              <Link to={item.url}>
+          {navigationLinks.map(item => (
+            <li key={item.title}>
+              <NavLink 
+                to={item.url} 
+                className={({ isActive }) => isActive ? "flex justify-center min-w-40 py-3 border-b-4 border-b-white" : "flex justify-center min-w-40 py-3 border-b-4 border-b-[transparent]"}
+              >
                 {item.title}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
